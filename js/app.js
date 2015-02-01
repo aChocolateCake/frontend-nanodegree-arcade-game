@@ -6,9 +6,15 @@ var randomY = function(){
     return posY[Math.floor(Math.random()*posY.length)];
 }
 
+var enemyImages = ['images/enemy-bug.png','images/enemy-snail.png'];
+
+var randomEnemy = function(){
+    return enemyImages[Math.floor(Math.random()*enemyImages.length)];
+}
+
 // enemy class. enemies our player must avoid
 var Enemy = function() {
-    this.sprite = 'images/enemy-bug.png';
+    this.sprite = randomEnemy();//'images/enemy-bug.png';
     this.x = -50;
     this.y = randomY();//posY[Math.floor(Math.random()*posY.length)];
     this.speed = Math.floor(Math.random() * 300) + 100;
@@ -44,7 +50,7 @@ var Player = function() {
 }
 
 // spawns enemies
-var allEnemies = [new Enemy(), new Enemy(), new Enemy()];
+var allEnemies = [new Enemy(), new Enemy(), new Enemy(), new Enemy()];
 
 // spawns player
 var player = new Player();
