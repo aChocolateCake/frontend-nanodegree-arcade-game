@@ -5,35 +5,36 @@ var posY = [60,142,225];
 var randomY = function(){
     return posY[Math.floor(Math.random()*posY.length)];
 }
-
+// array of enemy images
 var enemyImages = ['images/enemy-bug.png','images/enemy-snail.png'];
 
+// gets random enemy image
 var randomEnemy = function(){
     return enemyImages[Math.floor(Math.random()*enemyImages.length)];
 }
 
 // enemy class. enemies our player must avoid
 var Enemy = function() {
-    this.sprite = randomEnemy();//'images/enemy-bug.png';
+    this.sprite = randomEnemy();
     this.x = -50;
-    this.y = randomY();//posY[Math.floor(Math.random()*posY.length)];
+    this.y = randomY();
     this.speed = Math.floor(Math.random() * 300) + 100;
 }
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    // collision detection
-    if((this.x + 100 >= player.x && this.x + 100 <= player.x + 75) && (this.y + 70 >= player.y && this.y <= player.y + 60)){
+    //collision detection. TODO: switch collision to player instead?
+    if(((this.x + 100 >= player.x) && (this.x <= player.x + 75)) && ((this.y + 65 >= player.y) && (this.y <= player.y + 65))){
         player.resetPos();
     }
-    // moves enemy if it isn't at the end of playable area 
+
     if (this.x < 550){
         this.x += (this.speed * dt);
     // moves enemy to beginning again if at end of playable area    
     } else if (this.x > 550){
         this.x = -50;
-        this.y = randomY();//posY[Math.floor(Math.random()*posY.length)];
+        this.y = randomY();
         }
     }
 
@@ -50,7 +51,7 @@ var Player = function() {
 }
 
 // spawns enemies
-var allEnemies = [new Enemy(), new Enemy(), new Enemy(), new Enemy()];
+var allEnemies = [new Enemy()];
 
 // spawns player
 var player = new Player();
