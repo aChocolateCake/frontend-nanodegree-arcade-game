@@ -29,9 +29,9 @@ Enemy.prototype.update = function(dt) {
         player.resetPos();
     }
 
+// moves enemy to beginning again if at end of playable area 
     if (this.x < 550){
-        this.x += (this.speed * dt);
-    // moves enemy to beginning again if at end of playable area    
+        this.x += (this.speed * dt);   
     } else if (this.x > 550){
         this.x = -50;
         this.y = randomY();
@@ -51,7 +51,7 @@ var Player = function() {
 }
 
 // spawns enemies
-var allEnemies = [new Enemy()];
+var allEnemies = [new Enemy(), new Enemy(), new Enemy(), new Enemy()];
 
 // spawns player
 var player = new Player();
