@@ -1,17 +1,17 @@
-// static y positions to use 
+// static y positions to use for bug generation
 var posY = [60,142,225];
 
 // gets random from posY
 var randomY = function(){
     return posY[Math.floor(Math.random()*posY.length)];
-}
+};
 // array of enemy images
 var enemyImages = ['images/enemy-bug.png','images/enemy-snail.png'];
 
 // gets random enemy image
 var randomEnemy = function(){
     return enemyImages[Math.floor(Math.random()*enemyImages.length)];
-}
+};
 
 // enemy class. enemies our player must avoid
 var Enemy = function() {
@@ -19,7 +19,7 @@ var Enemy = function() {
     this.x = -50;
     this.y = randomY();
     this.speed = Math.floor(Math.random() * 300) + 100;
-}
+};
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -36,19 +36,19 @@ Enemy.prototype.update = function(dt) {
         this.x = -50;
         this.y = randomY();
         }
-    }
+    };
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 // player class. This class requires an update(), render() and a handleInput() method
 var Player = function() {
     this.sprite = 'images/char-cat-girl.png';
     this.x = 200;
     this.y = 400;
-}
+};
 
 // spawns enemies
 var allEnemies = [new Enemy(), new Enemy(), new Enemy(), new Enemy()];
@@ -58,32 +58,29 @@ var player = new Player();
 
 // Update player movement
 Player.prototype.update = function(dt) {
-    this.x * dt + this.speed;
-    this.y * dt + this.speed;
-
     // checks if player has hit water
     if(this.y <= 10){
         this.resetPos();
     }
-}
+};
 
 // checks for win scenerio (player hits water)
 Player.prototype.win = function(){
     if(this.y <= 10){
         this.resetPos();
     }
-}
+};
 
 // renders the player image
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 
-}
+};
 // resets player position
 Player.prototype.resetPos = function() {
   this.x = 200;
   this.y = 400;
-}
+};
 
 // player movement
 Player.prototype.handleInput = function(keyPress) {
@@ -99,7 +96,7 @@ Player.prototype.handleInput = function(keyPress) {
     if (keyPress === 'left' && this.x > 0) {
         this.x -= 100;
     }
-}
+};
 
 // listens for key presses and sends the keys to Player.handleInput()
 document.addEventListener('keyup', function(e) {
